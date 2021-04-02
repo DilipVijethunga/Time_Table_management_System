@@ -26,7 +26,6 @@ public class DBConnect {
         catch (Exception e) {
                System.out.println(e);
         }
-        
         return con;
     
     }
