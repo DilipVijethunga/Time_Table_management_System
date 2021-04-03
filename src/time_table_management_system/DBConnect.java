@@ -17,16 +17,16 @@ public class DBConnect {
     
     
     public static Connection connect(){
-        Connection con = null;
+        Connection conn = null;
         
         try {
             Class.forName("con.mysql.jdbc.Driver");
-            con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/timetable_mgmt","root","1234");
+            conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/timetable_mgmt","root","1234");
         } 
         catch (Exception e) {
                System.out.println(e);
         }
-        return con;
+        return conn;
     
     }
     
