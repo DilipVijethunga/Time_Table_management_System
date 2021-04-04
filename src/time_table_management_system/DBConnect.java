@@ -5,8 +5,10 @@
  */
 package time_table_management_system;
 
-import com.mysql.jdbc.Connection;
+
+import java.sql.Connection;
 import java.sql.DriverManager;
+
 
 /**
  *
@@ -20,11 +22,12 @@ public class DBConnect {
         Connection conn = null;
         
         try {
-            Class.forName("con.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/timetable_mgmt","root","1234");
         } 
         catch (Exception e) {
                System.out.println(e);
+               e.printStackTrace();
         }
         return conn;
     
