@@ -9,6 +9,7 @@ package interfaces;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import javax.swing.JOptionPane;
 import time_table_management_system.DBConnect;
 
 /**
@@ -113,6 +114,11 @@ public class lecturers_mgmt extends javax.swing.JFrame {
         save2.setBackground(new java.awt.Color(168, 211, 229));
         save2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         save2.setText("Save");
+        save2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                save2ActionPerformed(evt);
+            }
+        });
 
         edit.setBackground(new java.awt.Color(168, 211, 229));
         edit.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -276,39 +282,42 @@ public class lecturers_mgmt extends javax.swing.JFrame {
 
     private void save1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save1ActionPerformed
         
-        try {
-            
-           float rnk = 0;
-           
-                    
+   
         //Save Button action
+        //eid int
+        //level int
+        //rank int
+        
         String lname = LectName.getText();
-        String eidstr = EmpID.getText().toString();
-            int eid = Integer.parseInt(eidstr); //casting
+        String eid = EmpID.getText();
         String fac = faculty.getSelectedItem().toString();
         String dep = department.getSelectedItem().toString();
         String cent = center.getSelectedItem().toString();
         String build = building.getSelectedItem().toString();
         String lev = level.getSelectedItem().toString();
-        String rnkstr = Rank.getText().toString();
-            if(rnkstr == null){
-                
-        }else{
-                
-                rnk = Float.parseFloat(rnkstr);
-            }  
+        String rnk = Rank.getText();
+        
+             
             
        
-        
-            String sql = "INSERT INTO lecturer(eid,lectur_name,faculty,department,center,building,level,rank) values "
-                    + "('"+ eid +"', '"+ lname +"', '"+ fac +"', '"+ dep +"', '"+ cent +"', '"+ build +"', '"+ lev +"', '"+ rnk +"')";
-             pst = con.prepareStatement(sql);
+       try { 
+            
+           String s = "INSERT INTO lecturer (eid, lectur_name, faculty, department, center, building, lec_level, lec_rank) values ('"+ eid +"', '"+ lname +"', '"+ fac +"', '"+ dep +"', '"+ cent +"', '"+ build +"', '"+ lev +"', '"+ rnk +"')";
+           
+           pst = con.prepareStatement(s);
              pst.execute();
         } 
         catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e);
+            System.out.print(e);
         }
         
     }//GEN-LAST:event_save1ActionPerformed
+
+    private void save2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save2ActionPerformed
+                                             
+        
+    }//GEN-LAST:event_save2ActionPerformed
 
     /**
      * @param args the command line arguments
