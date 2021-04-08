@@ -214,6 +214,7 @@ public class lecturers_mgmt extends javax.swing.JFrame {
         jScrollPane1.setViewportView(lectDetails);
 
         errorBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        errorBox.setForeground(new java.awt.Color(255, 51, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
