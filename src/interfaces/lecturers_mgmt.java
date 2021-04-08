@@ -5,8 +5,6 @@
  */
 package interfaces;
 
-
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,6 +12,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import net.proteanit.sql.DbUtils;
 import time_table_management_system.DBConnect;
 
@@ -27,34 +26,34 @@ public class lecturers_mgmt extends javax.swing.JFrame {
     Connection con = null;
     PreparedStatement pst = null;
     ResultSet res = null;
-    
-    
+
+    JTextField rankText = new JTextField("testing");
+
     public lecturers_mgmt() {
         initComponents();
-        
+
         con = DBConnect.connect();
-        
+
+        rankText.setEditable(false);
+
         //load table details
         lectureDetails();
-        
+
     }
 
-    public void lectureDetails(){
-        
-        
+    public void lectureDetails() {
+
         try {
             String sql = "SELECT eid as 'Employee ID', lectur_name as 'Lecturer Name', faculty as 'Faculty', department as 'Department', center as 'Center', building as 'Building', lec_level as 'Level', lec_rank as 'Rank' FROM lecturer";
             pst = con.prepareStatement(sql);
             res = pst.executeQuery();
-            
+
             lectDetails.setModel(DbUtils.resultSetToTableModel(res));
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(lecturers_mgmt.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -83,13 +82,24 @@ public class lecturers_mgmt extends javax.swing.JFrame {
         level = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         lectDetails = new javax.swing.JTable();
+        errorBox = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1280, 720));
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         AddLect.setBackground(new java.awt.Color(168, 211, 229));
         AddLect.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         AddLect.setText("Add Lecturer");
+        AddLect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddLectActionPerformed(evt);
+            }
+        });
 
         RankGen.setBackground(new java.awt.Color(168, 211, 229));
         RankGen.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -162,6 +172,13 @@ public class lecturers_mgmt extends javax.swing.JFrame {
                 EmpIDActionPerformed(evt);
             }
         });
+        EmpID.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                EmpIDKeyPressed(evt);
+            }
+        });
+
+        Rank.setBackground(new java.awt.Color(204, 204, 204));
 
         faculty.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Faculty of Computing", "Faculty of Engineering", "Faculty of Busniess", "Faculty of Humanities & Sciences", "Faculty of Graduate Studies & Research", "School of Architecture", "School of Law" }));
 
@@ -195,6 +212,8 @@ public class lecturers_mgmt extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(lectDetails);
+
+        errorBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -248,7 +267,9 @@ public class lecturers_mgmt extends javax.swing.JFrame {
                         .addComponent(RankGen)
                         .addGap(18, 18, 18)
                         .addComponent(save1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(743, Short.MAX_VALUE))))
+                        .addGap(60, 60, 60)
+                        .addComponent(errorBox, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -257,7 +278,8 @@ public class lecturers_mgmt extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AddLect, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(RankGen, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(save1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(save1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(errorBox, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -314,22 +336,20 @@ public class lecturers_mgmt extends javax.swing.JFrame {
     }//GEN-LAST:event_LectNameActionPerformed
 
     private void EmpIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmpIDActionPerformed
-         // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_EmpIDActionPerformed
 
     private void departmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departmentActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_departmentActionPerformed
 
-    
     //save button action
     private void save1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save1ActionPerformed
-        
+
         //Save Button action
         //eid int
         //level int
         //rank int
-        
         String lname = LectName.getText();
         String eid = EmpID.getText();
         String fac = faculty.getSelectedItem().toString();
@@ -338,32 +358,30 @@ public class lecturers_mgmt extends javax.swing.JFrame {
         String build = building.getSelectedItem().toString();
         String lev = level.getSelectedItem().toString();
         String rnk = Rank.getText();
-       
-        
-     
-       try { 
-            
-           String s = "INSERT INTO lecturer (eid, lectur_name, faculty, department, center, building, lec_level, lec_rank) values ('"+ eid +"', '"+ lname +"', '"+ fac +"', '"+ dep +"', '"+ cent +"', '"+ build +"', '"+ lev +"', '"+ rnk +"')";
-           pst = con.prepareStatement(s);
-           pst.execute();
-           
-           //load tabledetails after adding a new one
-           lectureDetails();
-           
-        } 
-        catch (Exception e) {
+
+        try {
+
+            String s = "INSERT INTO lecturer (eid, lectur_name, faculty, department, center, building, lec_level, lec_rank) values ('" + eid + "', '" + lname + "', '" + fac + "', '" + dep + "', '" + cent + "', '" + build + "', '" + lev + "', '" + rnk + "')";
+            pst = con.prepareStatement(s);
+            pst.execute();
+
+            //load tabledetails after adding a new one
+            lectureDetails();
+
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e);
             System.out.print(e);
         }
-        
+
     }//GEN-LAST:event_save1ActionPerformed
+    
+
     //Update details 
     private void save2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save2ActionPerformed
-             
-        
+
         int x = JOptionPane.showConfirmDialog(null, "Do you want to update?");
-        
-        if (x == 0){
+
+        if (x == 0) {
             String lname = LectName.getText();
             String eid = EmpID.getText();
             String fac = faculty.getSelectedItem().toString();
@@ -372,31 +390,27 @@ public class lecturers_mgmt extends javax.swing.JFrame {
             String build = building.getSelectedItem().toString();
             String lev = level.getSelectedItem().toString();
             String rnk = Rank.getText();
-        
-            
+
             try {
-                String sql = "UPDATE lecturer SET lectur_name = '"+ lname +"', faculty = '"+ fac +"', department = '"+ dep +"', center = '"+ cent +"', building = '"+ build +"', lec_level = '"+ lev +"', lec_rank = '"+ rnk +"' where eid = '"+ eid +"' ";
+                String sql = "UPDATE lecturer SET lectur_name = '" + lname + "', faculty = '" + fac + "', department = '" + dep + "', center = '" + cent + "', building = '" + build + "', lec_level = '" + lev + "', lec_rank = '" + rnk + "' where eid = '" + eid + "' ";
                 pst = con.prepareStatement(sql);
                 pst.execute();
-                
+
                 //load table after editing button pressed
                 lectureDetails();
-                
+
             } catch (SQLException ex) {
                 Logger.getLogger(lecturers_mgmt.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-            
-            
+
         }
     }//GEN-LAST:event_save2ActionPerformed
 
-    
-    //table mouse click event(when editing)
+    //table mouse click on an entry(when editing)
     private void lectDetailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lectDetailsMouseClicked
-        
+
         int row = lectDetails.getSelectedRow();
-        
+
         String lname = lectDetails.getValueAt(row, 1).toString();
         String eid = lectDetails.getValueAt(row, 0).toString();
         String fac = lectDetails.getValueAt(row, 2).toString();
@@ -405,7 +419,7 @@ public class lecturers_mgmt extends javax.swing.JFrame {
         String build = lectDetails.getValueAt(row, 5).toString();
         String lev = lectDetails.getValueAt(row, 6).toString();
         String rnk = lectDetails.getValueAt(row, 7).toString();
-        
+
         LectName.setText(lname);
         EmpID.setText(eid);
         faculty.setSelectedItem(fac);
@@ -414,56 +428,85 @@ public class lecturers_mgmt extends javax.swing.JFrame {
         building.setSelectedItem(build);
         level.setSelectedItem(lev);
         Rank.setText(rnk);
-        
-        
-                
+
+
     }//GEN-LAST:event_lectDetailsMouseClicked
 
-    
     //Generate rank button action
     private void RankGenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RankGenActionPerformed
-        
-        
+
         String eid = EmpID.getText();
         String lev = level.getSelectedItem().toString();
-        
-        Rank.setText(eid + "."+ lev);
-        
+
+        Rank.setText(eid + "." + lev);
+
     }//GEN-LAST:event_RankGenActionPerformed
 
-    
-    
     //Delete Button Action
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
-        
+
         int x = JOptionPane.showConfirmDialog(null, "Do you want to delete?");
-        
-        if (x == 0){
-            
+
+        if (x == 0) {
+
             String eid = EmpID.getText();
-            
-            String sql = "DELETE FROM lecturer where eid = '"+eid+"'";
-            
+
+            String sql = "DELETE FROM lecturer where eid = '" + eid + "'";
+
             try {
-                
+
                 pst = con.prepareStatement(sql);
                 pst.execute();
-                
+
                 //load table after delete button pressed
                 lectureDetails();
-        
+
             } catch (SQLException ex) {
                 Logger.getLogger(lecturers_mgmt.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-            
-            
+
         }
-        
+
     }//GEN-LAST:event_deleteActionPerformed
 
-    
-    
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+
+        Rank.setEditable(false);
+
+    }//GEN-LAST:event_formComponentShown
+
+    //integeer validation for employee ID
+    private void EmpIDKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_EmpIDKeyPressed
+
+        char c = evt.getKeyChar();
+
+        if (Character.isLetter(c)) {
+            save1.setEnabled(false);
+            errorBox.setText("Only numbers Allowed");
+        } else if (Character.isDigit(c)) {
+            save1.setEnabled(true);
+            errorBox.setText("");
+        } else if (EmpID.getText().isEmpty()) {
+            save1.setEnabled(true);
+            errorBox.setText("");
+        }
+
+    }//GEN-LAST:event_EmpIDKeyPressed
+
+    //Clear all fields
+    private void AddLectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddLectActionPerformed
+
+        LectName.setText(null);
+        EmpID.setText(null);
+        faculty.setSelectedItem("Faculty of Computing");
+        department.setSelectedItem("Information Technology.");
+        center.setSelectedItem("Malabe");
+        building.setSelectedItem("Main Building");
+        level.setSelectedItem("1");
+        Rank.setText(null);
+
+    }//GEN-LAST:event_AddLectActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -509,6 +552,7 @@ public class lecturers_mgmt extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> center;
     private javax.swing.JButton delete;
     private javax.swing.JComboBox<String> department;
+    private javax.swing.JLabel errorBox;
     private javax.swing.JComboBox<String> faculty;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
