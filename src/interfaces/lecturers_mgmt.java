@@ -36,11 +36,12 @@ public class lecturers_mgmt extends javax.swing.JFrame {
 
         rankText.setEditable(false);
 
-        //load table details
+        //load table details 
         lectureDetails();
 
     }
 
+    //load table details and show
     public void lectureDetails() {
 
         try {
