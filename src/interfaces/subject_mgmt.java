@@ -94,6 +94,7 @@ public class subject_mgmt extends javax.swing.JFrame {
         tm = new javax.swing.JSpinner();
         evm = new javax.swing.JSpinner();
         labm = new javax.swing.JSpinner();
+        save3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Manage Subjects");
@@ -220,7 +221,7 @@ public class subject_mgmt extends javax.swing.JFrame {
         });
 
         lm1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lm1.setModel(new javax.swing.SpinnerNumberModel(0, 0, 60, 1));
+        lm1.setModel(new javax.swing.SpinnerNumberModel(0, 0, 60, 15));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel11.setText("H");
@@ -247,13 +248,21 @@ public class subject_mgmt extends javax.swing.JFrame {
         jLabel18.setText("M");
 
         tm.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        tm.setModel(new javax.swing.SpinnerNumberModel(0, 0, 60, 1));
+        tm.setModel(new javax.swing.SpinnerNumberModel(0, 0, 60, 15));
 
         evm.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        evm.setModel(new javax.swing.SpinnerNumberModel(0, 0, 60, 1));
+        evm.setModel(new javax.swing.SpinnerNumberModel(0, 0, 60, 15));
 
         labm.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        labm.setModel(new javax.swing.SpinnerNumberModel(0, 0, 60, 1));
+        labm.setModel(new javax.swing.SpinnerNumberModel(0, 0, 60, 15));
+
+        save3.setBackground(new java.awt.Color(168, 211, 229));
+        save3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        save3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                save3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -265,32 +274,37 @@ public class subject_mgmt extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1018, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(42, 42, 42)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel5)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(298, 298, 298)))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(54, 54, 54)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(subjName, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(oYear, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(subjCode, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(sem1)
+                                                    .addGap(32, 32, 32)
+                                                    .addComponent(sem2)))))
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addComponent(save3)
+                                .addGap(18, 18, 18)
                                 .addComponent(saveBT1)
                                 .addGap(18, 18, 18)
                                 .addComponent(AddSubj)
                                 .addGap(19, 19, 19)
-                                .addComponent(saveBT))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(298, 298, 298)))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(54, 54, 54)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(subjName, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(oYear, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(subjCode, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(sem1)
-                                            .addGap(32, 32, 32)
-                                            .addComponent(sem2)))))
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(saveBT)))
                         .addGap(38, 38, 38)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -338,10 +352,12 @@ public class subject_mgmt extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(saveBT1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(AddSubj, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(saveBT, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(saveBT1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(AddSubj, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(saveBT, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(save3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -615,6 +631,12 @@ public class subject_mgmt extends javax.swing.JFrame {
         subjCode.setText(scode);
     }//GEN-LAST:event_subjDetailsMouseClicked
 
+    private void save3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save3ActionPerformed
+        Main homebt = new Main();
+        homebt.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_save3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -678,6 +700,7 @@ public class subject_mgmt extends javax.swing.JFrame {
     private javax.swing.JSpinner lh1;
     private javax.swing.JSpinner lm1;
     private javax.swing.JComboBox<String> oYear;
+    private javax.swing.JButton save3;
     private javax.swing.JButton saveBT;
     private javax.swing.JButton saveBT1;
     private javax.swing.JRadioButton sem1;

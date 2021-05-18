@@ -84,6 +84,7 @@ public class lecturers_mgmt extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         lectDetails = new javax.swing.JTable();
         errorBox = new javax.swing.JLabel();
+        save3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1280, 720));
@@ -195,6 +196,11 @@ public class lecturers_mgmt extends javax.swing.JFrame {
         building.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Main Building", "New building", "D-block" }));
 
         level.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6" }));
+        level.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                levelKeyTyped(evt);
+            }
+        });
 
         lectDetails.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -216,6 +222,14 @@ public class lecturers_mgmt extends javax.swing.JFrame {
 
         errorBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         errorBox.setForeground(new java.awt.Color(255, 51, 0));
+
+        save3.setBackground(new java.awt.Color(168, 211, 229));
+        save3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        save3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                save3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -264,12 +278,15 @@ public class lecturers_mgmt extends javax.swing.JFrame {
                             .addComponent(level, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap(283, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(save3)
+                        .addGap(18, 18, 18)
                         .addComponent(AddLect)
                         .addGap(19, 19, 19)
                         .addComponent(RankGen)
                         .addGap(18, 18, 18)
                         .addComponent(save1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(60, 60, 60)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(errorBox, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
@@ -281,7 +298,8 @@ public class lecturers_mgmt extends javax.swing.JFrame {
                     .addComponent(AddLect, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(RankGen, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(save1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(errorBox, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(errorBox, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(save3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -337,9 +355,16 @@ public class lecturers_mgmt extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_LectNameActionPerformed
 
+    //auto generate rank
     private void EmpIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmpIDActionPerformed
-        // TODO add your handling code here:
+
+        String eid = EmpID.getText();
+        String lev = level.getSelectedItem().toString();
+
+        Rank.setText(eid + "." + lev);
+
     }//GEN-LAST:event_EmpIDActionPerformed
+
 
     private void departmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departmentActionPerformed
         // TODO add your handling code here:
@@ -376,7 +401,6 @@ public class lecturers_mgmt extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_save1ActionPerformed
-    
 
     //Update details 
     private void save2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save2ActionPerformed
@@ -404,8 +428,6 @@ public class lecturers_mgmt extends javax.swing.JFrame {
             } catch (SQLException ex) {
                 Logger.getLogger(lecturers_mgmt.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-        }
     }//GEN-LAST:event_save2ActionPerformed
 
     //table mouse click on an entry(when editing)
@@ -434,7 +456,7 @@ public class lecturers_mgmt extends javax.swing.JFrame {
 
     }//GEN-LAST:event_lectDetailsMouseClicked
 
-    //Generate rank button action
+
     private void RankGenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RankGenActionPerformed
 
         String eid = EmpID.getText();
@@ -477,24 +499,6 @@ public class lecturers_mgmt extends javax.swing.JFrame {
 
     }//GEN-LAST:event_formComponentShown
 
-    //integeer validation for employee ID
-    private void EmpIDKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_EmpIDKeyPressed
-
-        char c = evt.getKeyChar();
-
-        if (Character.isLetter(c)) {
-            save1.setEnabled(false);
-            errorBox.setText("Only numbers Allowed");
-        } else if (Character.isDigit(c)) {
-            save1.setEnabled(true);
-            errorBox.setText("");
-        } else if (EmpID.getText().isEmpty()) {
-            save1.setEnabled(true);
-            errorBox.setText("");
-        }
-
-    }//GEN-LAST:event_EmpIDKeyPressed
-
     //Clear all fields
     private void AddLectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddLectActionPerformed
 
@@ -508,6 +512,31 @@ public class lecturers_mgmt extends javax.swing.JFrame {
         Rank.setText(null);
 
     }//GEN-LAST:event_AddLectActionPerformed
+
+    private void levelKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_levelKeyTyped
+
+    }//GEN-LAST:event_levelKeyTyped
+
+    private void save3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save3ActionPerformed
+        Main homebt = new Main();
+        homebt.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_save3ActionPerformed
+
+    private void EmpIDKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_EmpIDKeyPressed
+        char c = evt.getKeyChar();
+
+        if (Character.isLetter(c)) {
+            save1.setEnabled(false);
+            errorBox.setText("Only numbers Allowed");
+        } else if (Character.isDigit(c)) {
+            save1.setEnabled(true);
+            errorBox.setText("");
+        } else if (EmpID.getText().isEmpty()) {
+            save1.setEnabled(true);
+            errorBox.setText("");
+        }
+    }//GEN-LAST:event_EmpIDKeyPressed
 
     /**
      * @param args the command line arguments
@@ -569,5 +598,6 @@ public class lecturers_mgmt extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> level;
     private javax.swing.JButton save1;
     private javax.swing.JButton save2;
+    private javax.swing.JButton save3;
     // End of variables declaration//GEN-END:variables
 }
