@@ -5,32 +5,32 @@
  */
 package time_table_management_system;
 
-
 import java.sql.Connection;
 import java.sql.DriverManager;
-
 
 /**
  *
  * @author DILIP
  */
 public class DBConnect {
-    
-    
-    
-    public static Connection connect(){
-        Connection conn = null;
-        
+
+    private static Connection conn;
+
+    public static Connection connect() {
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/timetable_mgmt","root","1234");
-        } 
-        catch (Exception e) {
-               System.out.println(e);
-               e.printStackTrace();
+
+            if (conn == null) {
+                conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/timetable_mgmt", "root", "1234");
+                return conn;
+            } else {
+                return conn;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            e.printStackTrace();
         }
         return conn;
-    
     }
-    
 }

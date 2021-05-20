@@ -5,6 +5,7 @@
  */
 package interfaces;
 
+import Utils.SqlUtill;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -94,7 +95,7 @@ public class subject_mgmt extends javax.swing.JFrame {
         tm = new javax.swing.JSpinner();
         evm = new javax.swing.JSpinner();
         labm = new javax.swing.JSpinner();
-        save3 = new javax.swing.JButton();
+        homebtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Manage Subjects");
@@ -256,11 +257,11 @@ public class subject_mgmt extends javax.swing.JFrame {
         labm.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         labm.setModel(new javax.swing.SpinnerNumberModel(0, 0, 60, 15));
 
-        save3.setBackground(new java.awt.Color(168, 211, 229));
-        save3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        save3.addActionListener(new java.awt.event.ActionListener() {
+        homebtn.setBackground(new java.awt.Color(168, 211, 229));
+        homebtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        homebtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                save3ActionPerformed(evt);
+                homebtnActionPerformed(evt);
             }
         });
 
@@ -298,7 +299,7 @@ public class subject_mgmt extends javax.swing.JFrame {
                                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(23, 23, 23)
-                                .addComponent(save3)
+                                .addComponent(homebtn)
                                 .addGap(18, 18, 18)
                                 .addComponent(saveBT1)
                                 .addGap(18, 18, 18)
@@ -357,7 +358,7 @@ public class subject_mgmt extends javax.swing.JFrame {
                                 .addComponent(saveBT1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(AddSubj, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(saveBT, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(save3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(homebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -425,6 +426,7 @@ public class subject_mgmt extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void AddSubjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddSubjActionPerformed
@@ -434,6 +436,8 @@ public class subject_mgmt extends javax.swing.JFrame {
 
     //add data to DB
     private void saveBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBTActionPerformed
+
+        ConvertToMin(Integer.parseInt(lh1.getValue().toString()), Integer.parseInt(lm1.getValue().toString()));
 
         String sem = null;
 
@@ -471,13 +475,14 @@ public class subject_mgmt extends javax.swing.JFrame {
 
         String sql = "INSERT INTO subject (subj_code, offered_year, offered_sem, subj_name, lect_hours, tute_hours, lab_hours, eval_hours) values ('" + scode + "', '" + year + "', '" + semNo + "', '" + subName + "', '" + lecture + "', '" + tutorial + "', '" + labs + "', '" + Evaluation + "')";
         try {
-            pst = con.prepareStatement(sql);
-            pst.execute();
+            SqlUtill.InsertData(sql);
+            //pst = con.prepareStatement(sql);
+            //pst.execute();
 
             showSubjDetails();
 
-        } catch (SQLException ex) {
-            Logger.getLogger(subject_mgmt.class.getName()).log(Level.SEVERE, null, ex);
+        } catch(Exception e){
+            e.printStackTrace();
         }
 
 
@@ -491,10 +496,9 @@ public class subject_mgmt extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_saveBT1ActionPerformed
 
-    
-    //Delete button avtion
+    //Delete button action
     private void DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteActionPerformed
-        
+
         //confirmation
         int x = JOptionPane.showConfirmDialog(null, "Do you want to update?");
 
@@ -532,21 +536,17 @@ public class subject_mgmt extends javax.swing.JFrame {
             String evHours = evh.getValue().toString();
             String evMinutes = evm.getValue().toString();
             String Evaluation = evHours + ":" + evMinutes;
-            
-            try {
-                String sql = "DELETE from Subject where subj_code = '"+scode+"' ";
-                pst = con.prepareStatement(sql);
-                pst.execute();
-                
-                showSubjDetails();
 
-            }catch (SQLException ex) {
-            Logger.getLogger(subject_mgmt.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            String sql = "DELETE from Subject where subj_code = '" + scode + "' ";
+            SqlUtill.DeleteData(sql);
+            
+            //pst = con.prepareStatement(sql);
+            // pst.execute();
+            
+            showSubjDetails();
         }
     }//GEN-LAST:event_DeleteActionPerformed
 
-    
     //Update data
     private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
 
@@ -587,17 +587,18 @@ public class subject_mgmt extends javax.swing.JFrame {
             String evHours = evh.getValue().toString();
             String evMinutes = evm.getValue().toString();
             String Evaluation = evHours + ":" + evMinutes;
-            
+
             try {
-                String sql = "UPDATE subject SET subj_code = '" + scode + "', offered_year = '" + year + "', offered_sem = '" + semNo + "', subj_name = '" + subName + "', lect_hours = '" + lecture + "', tute_hours ='" + tutorial + "', lab_hours = '" + labs + "', eval_hours = '" + Evaluation + "' where subj_code = '"+ scode +"'";
+                String sql = "UPDATE subject SET subj_code = '" + scode + "', offered_year = '" + year + "', offered_sem = '" + semNo + "', subj_name = '" + subName + "', lect_hours = '" + lecture + "', tute_hours ='" + tutorial + "', lab_hours = '" + labs + "', eval_hours = '" + Evaluation + "' where subj_code = '" + scode + "'";
+                
                 pst = con.prepareStatement(sql);
                 pst.execute();
-                
+
                 showSubjDetails();
 
-            }catch (SQLException ex) {
-            Logger.getLogger(subject_mgmt.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            } catch (Exception e ){
+                e.printStackTrace();;
+            }
         }
     }//GEN-LAST:event_updateActionPerformed
 
@@ -631,11 +632,11 @@ public class subject_mgmt extends javax.swing.JFrame {
         subjCode.setText(scode);
     }//GEN-LAST:event_subjDetailsMouseClicked
 
-    private void save3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save3ActionPerformed
+    private void homebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homebtnActionPerformed
         Main homebt = new Main();
         homebt.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_save3ActionPerformed
+    }//GEN-LAST:event_homebtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -678,6 +679,7 @@ public class subject_mgmt extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JSpinner evh;
     private javax.swing.JSpinner evm;
+    private javax.swing.JButton homebtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -700,7 +702,6 @@ public class subject_mgmt extends javax.swing.JFrame {
     private javax.swing.JSpinner lh1;
     private javax.swing.JSpinner lm1;
     private javax.swing.JComboBox<String> oYear;
-    private javax.swing.JButton save3;
     private javax.swing.JButton saveBT;
     private javax.swing.JButton saveBT1;
     private javax.swing.JRadioButton sem1;
@@ -712,4 +713,24 @@ public class subject_mgmt extends javax.swing.JFrame {
     private javax.swing.JSpinner tm;
     private javax.swing.JButton update;
     // End of variables declaration//GEN-END:variables
+
+    private void ConvertToMin(int hours, int min) {
+
+        try {
+
+            int hr_to_min = hours * 60;
+
+            System.out.println((hr_to_min + min) + " tot min");
+            int tot = hr_to_min + min;
+
+            int hh = tot / 60;
+
+            int mm = tot % 60;
+
+            System.out.println(hh + "  " + mm);
+
+        } catch (Exception e) {
+        }
+
+    }
 }

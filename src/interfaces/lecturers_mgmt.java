@@ -182,7 +182,7 @@ public class lecturers_mgmt extends javax.swing.JFrame {
 
         Rank.setBackground(new java.awt.Color(204, 204, 204));
 
-        faculty.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Faculty of Computing", "Faculty of Engineering", "Faculty of Busniess", "Faculty of Humanities & Sciences", "Faculty of Graduate Studies & Research", "School of Architecture", "School of Law" }));
+        faculty.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Faculty of Computing", "Faculty of Engineering", "Faculty of Business", "Faculty of Humanities & Sciences", "Faculty of Graduate Studies & Research", "School of Architecture", "School of Law" }));
 
         department.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Information Technology.", "Computer systems & network engineering.", "Software Engineering.", "Information Systems Engineering.", "Cyber Security.", "Interactive Media.", "Data Science.", "Bachelor of Information Technology – Curtin University." }));
         department.addActionListener(new java.awt.event.ActionListener() {
@@ -349,6 +349,7 @@ public class lecturers_mgmt extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void LectNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LectNameActionPerformed
@@ -422,8 +423,8 @@ public class lecturers_mgmt extends javax.swing.JFrame {
                 pst = con.prepareStatement(sql);
                 pst.execute();
 
-                //load table after editing button pressed
-                lectureDetails();
+                //load table after editing button pressed 
+               lectureDetails();
 
             } catch (SQLException ex) {
                 Logger.getLogger(lecturers_mgmt.class.getName()).log(Level.SEVERE, null, ex);
