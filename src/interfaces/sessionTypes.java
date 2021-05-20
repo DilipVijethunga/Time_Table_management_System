@@ -136,7 +136,7 @@ public class sessionTypes extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "ID", "Lecturer 1", "Lecturer 2", "Subject Code","Subject","Tag","Group ID","Student Count","Duration",
+                "ID", "Lecturer 1", "Lecturer 2", "Lecturer 3","Subject","Tag","Group ID","Student Count","Duration",
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -198,7 +198,7 @@ public class sessionTypes extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "ID", "Lecturer 1", "Lecturer 2", "Subject Code","Subject","Tag","Group ID","Student Count","Duration",
+                "ID", "Lecturer 1", "Lecturer 2", "Lecturer 3","Subject","Tag","Group ID","Student Count","Duration",
             }
         ));
         jScrollPane2.setViewportView(jTable2);
@@ -259,7 +259,7 @@ public class sessionTypes extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "ID", "Lecturer 1", "Lecturer 2", "Subject Code","Subject","Tag","Group ID","Student Count","Duration",
+                "ID", "Lecturer 1", "Lecturer 2", "Lecturer 3","Subject","Tag","Group ID","Student Count","Duration",
             }
         ));
         jScrollPane3.setViewportView(jTable3);
@@ -353,14 +353,14 @@ public class sessionTypes extends javax.swing.JFrame {
         String sid       =   jTable3.getValueAt(r, 0).toString();
         String lec1      =   jTable3.getValueAt(r, 1).toString();
         String lec2      =   jTable3.getValueAt(r, 2).toString();
-        String subcode   =   jTable3.getValueAt(r, 3).toString();
+        String lec3      =   jTable3.getValueAt(r, 3).toString();
         String subname   =   jTable3.getValueAt(r, 4).toString();
         String tag       =   jTable3.getValueAt(r, 5).toString();
         String grpid     =   jTable3.getValueAt(r, 6).toString();
         String stdcount  =   jTable3.getValueAt(r, 7).toString();
         String dura      =   jTable3.getValueAt(r, 8).toString();
         
-        String sql = "INSERT INTO nonoverlapping (session_id, lecturer_1, lecturer_2, subject_code, subject_name, tag, group_id, student_count, duration) values('"+ sid +"', '"+ lec1 +"', '"+ lec2 +"', '"+ subcode +"', '"+ subname +"', '"+ tag +"', '"+ grpid +"', '"+ stdcount +"', '"+ dura +"')";
+        String sql = "INSERT INTO nonoverlapping (session_id, lecturer_1, lecturer_2, lecturer_3, subject_name, tag, group_id, student_count, duration) values('"+ sid +"', '"+ lec1 +"', '"+ lec2 +"', '"+ lec3 +"', '"+ subname +"', '"+ tag +"', '"+ grpid +"', '"+ stdcount +"', '"+ dura +"')";
             
          try{
             
@@ -396,14 +396,14 @@ public class sessionTypes extends javax.swing.JFrame {
         String sid       =   jTable1.getValueAt(r, 0).toString();
         String lec1      =   jTable1.getValueAt(r, 1).toString();
         String lec2      =   jTable1.getValueAt(r, 2).toString();
-        String subcode   =   jTable1.getValueAt(r, 3).toString();
+        String lec3      =   jTable1.getValueAt(r, 3).toString();
         String subname   =   jTable1.getValueAt(r, 4).toString();
         String tag       =   jTable1.getValueAt(r, 5).toString();
         String grpid     =   jTable1.getValueAt(r, 6).toString();
         String stdcount  =   jTable1.getValueAt(r, 7).toString();
         String dura      =   jTable1.getValueAt(r, 8).toString();
         
-        String sql = "INSERT INTO consecutive (session_id, lecturer_1, lecturer_2, subject_code, subject_name, tag, group_id, student_count, duration) values('"+ sid +"', '"+ lec1 +"', '"+ lec2 +"', '"+ subcode +"', '"+ subname +"', '"+ tag +"', '"+ grpid +"', '"+ stdcount +"', '"+ dura +"')";
+        String sql = "INSERT INTO consecutive (session_id, lecturer_1, lecturer_2, lecturer_3, subject_name, tag, group_id, student_count, duration) values('"+ sid +"', '"+ lec1 +"', '"+ lec2 +"', '"+ lec3 +"', '"+ subname +"', '"+ tag +"', '"+ grpid +"', '"+ stdcount +"', '"+ dura +"')";
             
          try{
             
@@ -454,14 +454,14 @@ public class sessionTypes extends javax.swing.JFrame {
         String sid       =   jTable2.getValueAt(r, 0).toString();
         String lec1      =   jTable2.getValueAt(r, 1).toString();
         String lec2      =   jTable2.getValueAt(r, 2).toString();
-        String subcode   =   jTable2.getValueAt(r, 3).toString();
+        String lec3      =   jTable2.getValueAt(r, 3).toString();
         String subname   =   jTable2.getValueAt(r, 4).toString();
         String tag       =   jTable2.getValueAt(r, 5).toString();
         String grpid     =   jTable2.getValueAt(r, 6).toString();
         String stdcount  =   jTable2.getValueAt(r, 7).toString();
         String dura      =   jTable2.getValueAt(r, 8).toString();
         
-        String sql = "INSERT INTO parallel (session_id, lecturer_1, lecturer_2, subject_code, subject_name, tag, group_id, student_count, duration) values('"+ sid +"', '"+ lec1 +"', '"+ lec2 +"', '"+ subcode +"', '"+ subname +"', '"+ tag +"', '"+ grpid +"', '"+ stdcount +"', '"+ dura +"')";
+        String sql = "INSERT INTO parallel (session_id, lecturer_1, lecturer_2, lecturer_3, subject_name, tag, group_id, student_count, duration) values('"+ sid +"', '"+ lec1 +"', '"+ lec2 +"', '"+ lec3 +"', '"+ subname +"', '"+ tag +"', '"+ grpid +"', '"+ stdcount +"', '"+ dura +"')";
             
          try{
             

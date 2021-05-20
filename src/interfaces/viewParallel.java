@@ -78,7 +78,7 @@ public class viewParallel extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "ID", "Lecturer 1", "Lecturer 2", "Subject Code","Subject","Tag","Group ID","Student Count","Duration",
+                "ID", "Lecturer 1", "Lecturer 2", "Lecturer 3","Subject","Tag","Group ID","Student Count","Duration",
             }
         ));
         jScrollPane1.setViewportView(jTable5);
