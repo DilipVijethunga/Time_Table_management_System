@@ -197,12 +197,22 @@ public class addTag extends javax.swing.JFrame {
         
         try{
         
-        String t = "INSERT INTO tag (SubjectName, SubjectCode, RelatedTag) values('"+ tname +"', '"+ tcode +"', '"+ relatedtag +"')";
-        pst = con.prepareStatement(t);
-        pst.execute();
+            if(tname.equals("")||tcode.equals("")||relatedtag.equals("--Select--")){
+            
+                JOptionPane.showMessageDialog(this, "Please insert valid data");
+            
+            }
+            
+            else {
+          
+            String t = "INSERT INTO tag (SubjectName, SubjectCode, RelatedTag) values('"+ tname +"', '"+ tcode +"', '"+ relatedtag +"')";
+            pst = con.prepareStatement(t);
+            pst.execute();
         
         JOptionPane.showMessageDialog(this, "Tag added successfully!!");
         
+            }
+            
         }catch (Exception e){      
         }
         

@@ -285,7 +285,9 @@ public class manageTag extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       
+        
+        if(!jTable1.getSelectionModel().isSelectionEmpty()){
+        
         int x = JOptionPane.showConfirmDialog(null, "DO you really want to Update?");
         
         if(x==0){
@@ -313,13 +315,17 @@ public class manageTag extends javax.swing.JFrame {
             
             }
         
-        }   
-        
-        
+        }     
     }//GEN-LAST:event_jButton1ActionPerformed
 
+        else{
+            JOptionPane.showMessageDialog(this, "Select a tag to update ");
+        }
+    }
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+         if(!jTable1.getSelectionModel().isSelectionEmpty()){ 
         
          int x = JOptionPane.showConfirmDialog(null,"Do You want to Delete Tag?" );
         
@@ -339,14 +345,15 @@ public class manageTag extends javax.swing.JFrame {
                System.out.println(e);
                
            }
-      
-            
-        }
-        
-       
-        
+      }
+   
     }//GEN-LAST:event_jButton2ActionPerformed
 
+         else{
+            JOptionPane.showMessageDialog(this, "Select a row to delete ");
+        }
+    }
+         
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
        
         tagnamebox.setText(null);

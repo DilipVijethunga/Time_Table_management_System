@@ -334,13 +334,7 @@ public class addStudentGroup extends javax.swing.JFrame {
         
     
         try{
-            //all fields empty
-            /*if(year.equals("")&&program.equals("")&&grpno.equals("")&&subgrpno.equals("")&&grpid.equals("")&&subgrpid.equals("")){
-                
-                JOptionPane.showMessageDialog(this, "Please fill the fields");
-                
-            }*/
-          
+           
             //first fields --Selected-- or not
             if(year.equals("--Select--")||program.equals("--Select--")){
             

@@ -373,6 +373,8 @@ public class manageGroup extends javax.swing.JFrame {
 
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+         if(!jTable2.getSelectionModel().isSelectionEmpty()){
         
         int x = JOptionPane.showConfirmDialog(null, "DO you really want to Update?");
         
@@ -404,11 +406,13 @@ public class manageGroup extends javax.swing.JFrame {
             
             }
             
-        }
-        
-       
+        }       
     }//GEN-LAST:event_jButton1ActionPerformed
 
+         else{
+            JOptionPane.showMessageDialog(this, "Select a row ");
+        }
+    }
   
     
     private void yearsemboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yearsemboxActionPerformed
@@ -438,6 +442,8 @@ public class manageGroup extends javax.swing.JFrame {
     }//GEN-LAST:event_subgroupnoboxStateChanged
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        if(!jTable2.getSelectionModel().isSelectionEmpty()){
         
         int x = JOptionPane.showConfirmDialog(null,"Do You want to Delete Group?" );
         
@@ -460,9 +466,13 @@ public class manageGroup extends javax.swing.JFrame {
       
             
         }
-   
     }//GEN-LAST:event_jButton2ActionPerformed
 
+        else{
+            JOptionPane.showMessageDialog(this, "Select a row to delete ");
+        }
+    }
+        
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
        
         try{
