@@ -77,7 +77,7 @@ public class subject_mgmt extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         labh = new javax.swing.JSpinner();
         jLabel10 = new javax.swing.JLabel();
-        evh = new javax.swing.JSpinner();
+        evaluateh = new javax.swing.JSpinner();
         jScrollPane1 = new javax.swing.JScrollPane();
         subjDetails = new javax.swing.JTable();
         Delete = new javax.swing.JButton();
@@ -93,7 +93,7 @@ public class subject_mgmt extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         tm = new javax.swing.JSpinner();
-        evm = new javax.swing.JSpinner();
+        evaluatem = new javax.swing.JSpinner();
         labm = new javax.swing.JSpinner();
         homebtn = new javax.swing.JButton();
 
@@ -175,8 +175,8 @@ public class subject_mgmt extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel10.setText("Number of Evaluation Hours");
 
-        evh.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        evh.setModel(new javax.swing.SpinnerNumberModel(0, 0, 4, 1));
+        evaluateh.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        evaluateh.setModel(new javax.swing.SpinnerNumberModel(0, 0, 4, 1));
 
         subjDetails.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         subjDetails.setModel(new javax.swing.table.DefaultTableModel(
@@ -251,8 +251,8 @@ public class subject_mgmt extends javax.swing.JFrame {
         tm.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tm.setModel(new javax.swing.SpinnerNumberModel(0, 0, 60, 15));
 
-        evm.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        evm.setModel(new javax.swing.SpinnerNumberModel(0, 0, 60, 15));
+        evaluatem.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        evaluatem.setModel(new javax.swing.SpinnerNumberModel(0, 0, 60, 15));
 
         labm.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         labm.setModel(new javax.swing.SpinnerNumberModel(0, 0, 60, 15));
@@ -316,7 +316,7 @@ public class subject_mgmt extends javax.swing.JFrame {
                             .addComponent(jLabel10))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(evh, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(evaluateh, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lh1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(th, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(labh, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -331,7 +331,7 @@ public class subject_mgmt extends javax.swing.JFrame {
                             .addComponent(lm1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tm, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(labm, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(evm, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(evaluatem, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel18)
@@ -412,9 +412,9 @@ public class subject_mgmt extends javax.swing.JFrame {
                                             .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(evh, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(evaluateh, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(evm, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(evaluatem, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGap(31, 31, 31)))))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -437,7 +437,7 @@ public class subject_mgmt extends javax.swing.JFrame {
     //add data to DB
     private void saveBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBTActionPerformed
 
-        ConvertToMin(Integer.parseInt(lh1.getValue().toString()), Integer.parseInt(lm1.getValue().toString()));
+        
 
         String sem = null;
 
@@ -447,6 +447,26 @@ public class subject_mgmt extends javax.swing.JFrame {
             sem = "2";
         }
 
+        String year = oYear.getSelectedItem().toString();
+        String semNo = sem;
+        String subName = subjName.getText();
+        String scode = subjCode.getText();
+        
+        Integer lectureHours = ConvertToMin(Integer.parseInt(lh1.getValue().toString()), Integer.parseInt(lm1.getValue().toString()));
+        Integer tutorialHours = ConvertToMin(Integer.parseInt(th.getValue().toString()), Integer.parseInt(tm.getValue().toString()));
+        Integer labHours = ConvertToMin(Integer.parseInt(labh.getValue().toString()), Integer.parseInt(labm.getValue().toString()));
+        Integer evaluationHours = ConvertToMin(Integer.parseInt(evaluateh.getValue().toString()), Integer.parseInt(evaluatem.getValue().toString()));
+       
+        String lech = lectureHours.toString();
+        String tuteh = tutorialHours.toString();
+        String labh = labHours.toString();
+        String evalh = evaluationHours.toString();
+            
+        System.out.println(lech + tuteh + labh + evalh);
+        
+        String sql = "INSERT INTO subject (subj_code, offered_year, offered_sem, subj_name, lect_hours, tute_hours, lab_hours, eval_hours) values ('" + scode + "', '" + year + "', '" + semNo + "', '" + subName + "', '" + lech + "', '" + tuteh + "', '" + labh + "', '" + evalh + "')";
+        
+        /*
         String year = oYear.getSelectedItem().toString();
         String semNo = sem;
         String subName = subjName.getText();
@@ -472,8 +492,9 @@ public class subject_mgmt extends javax.swing.JFrame {
         String evHours = evh.getValue().toString();
         String evMinutes = evm.getValue().toString();
         String Evaluation = evHours + ":" + evMinutes;
-
-        String sql = "INSERT INTO subject (subj_code, offered_year, offered_sem, subj_name, lect_hours, tute_hours, lab_hours, eval_hours) values ('" + scode + "', '" + year + "', '" + semNo + "', '" + subName + "', '" + lecture + "', '" + tutorial + "', '" + labs + "', '" + Evaluation + "')";
+        */
+        
+        
         try {
             SqlUtill.InsertData(sql);
             //pst = con.prepareStatement(sql);
@@ -518,10 +539,13 @@ public class subject_mgmt extends javax.swing.JFrame {
 
             //Spinner
             //lecture hours
+            
+            
             String LectHours = lh1.getValue().toString();
             String LectMinutes = lm1.getValue().toString();
             String lecture = LectHours + ":" + LectMinutes;
-
+            
+            
             //Tutorial hours
             String tuteHours = th.getValue().toString();
             String tuteMinutes = tm.getValue().toString();
@@ -533,8 +557,8 @@ public class subject_mgmt extends javax.swing.JFrame {
             String labs = labhours + ":" + labMinutes;
 
             //evaluation hours
-            String evHours = evh.getValue().toString();
-            String evMinutes = evm.getValue().toString();
+            String evHours = evaluateh.getValue().toString();
+            String evMinutes = evaluatem.getValue().toString();
             String Evaluation = evHours + ":" + evMinutes;
 
             String sql = "DELETE from Subject where subj_code = '" + scode + "' ";
@@ -584,8 +608,8 @@ public class subject_mgmt extends javax.swing.JFrame {
             String labs = labhours + ":" + labMinutes;
 
             //evaluation hours
-            String evHours = evh.getValue().toString();
-            String evMinutes = evm.getValue().toString();
+            String evHours = evaluateh.getValue().toString();
+            String evMinutes = evaluatem.getValue().toString();
             String Evaluation = evHours + ":" + evMinutes;
 
             try {
@@ -677,8 +701,8 @@ public class subject_mgmt extends javax.swing.JFrame {
     private javax.swing.JButton AddSubj;
     private javax.swing.JButton Delete;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JSpinner evh;
-    private javax.swing.JSpinner evm;
+    private javax.swing.JSpinner evaluateh;
+    private javax.swing.JSpinner evaluatem;
     private javax.swing.JButton homebtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -714,23 +738,20 @@ public class subject_mgmt extends javax.swing.JFrame {
     private javax.swing.JButton update;
     // End of variables declaration//GEN-END:variables
 
-    private void ConvertToMin(int hours, int min) {
+    private int ConvertToMin(int hours, int min) {
 
-        try {
+        
 
             int hr_to_min = hours * 60;
 
-            System.out.println((hr_to_min + min) + " tot min");
-            int tot = hr_to_min + min;
-
+            return hr_to_min + min;
+            /*
             int hh = tot / 60;
-
             int mm = tot % 60;
-
             System.out.println(hh + "  " + mm);
-
-        } catch (Exception e) {
-        }
+            */
+            
+        
 
     }
 }

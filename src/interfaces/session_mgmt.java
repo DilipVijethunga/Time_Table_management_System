@@ -5,8 +5,7 @@
  */
 package interfaces;
 
-import SessionSearch;
-import SessionSearch;
+import interfaces.SessionSearch;
 import Utils.SqlUtill;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

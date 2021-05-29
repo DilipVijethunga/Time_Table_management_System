@@ -5,6 +5,7 @@
  */
 package time_table_management_system;
 
+import interfaces.Main;
 /**
  *
  * @author DILIP
@@ -15,7 +16,8 @@ public class Time_Table_management_System {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here d
+        Main mn = new Main();
+        mn.setVisible(true);
     }
     
 }

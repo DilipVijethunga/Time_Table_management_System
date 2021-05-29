@@ -430,7 +430,7 @@ public class lecturers_mgmt extends javax.swing.JFrame {
                 Logger.getLogger(lecturers_mgmt.class.getName()).log(Level.SEVERE, null, ex);
             }
     }//GEN-LAST:event_save2ActionPerformed
-
+}
     //table mouse click on an entry(when editing)
     private void lectDetailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lectDetailsMouseClicked
 
@@ -454,7 +454,7 @@ public class lecturers_mgmt extends javax.swing.JFrame {
         level.setSelectedItem(lev);
         Rank.setText(rnk);
 
-
+    
     }//GEN-LAST:event_lectDetailsMouseClicked
 
 
