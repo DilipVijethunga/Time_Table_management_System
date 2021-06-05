@@ -148,7 +148,7 @@ public class manageGroup extends javax.swing.JFrame {
             }
         });
 
-        programmebox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Select--", "IT", "Engineering", "BM" }));
+        programmebox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Select--", "IT", "CSSE", "IM", "CSE" }));
         programmebox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 programmeboxActionPerformed(evt);
@@ -374,39 +374,51 @@ public class manageGroup extends javax.swing.JFrame {
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
+         // Check row selected or not
          if(!jTable2.getSelectionModel().isSelectionEmpty()){
+             
+             // Validations 
+             String year1 = yearsembox.getSelectedItem().toString();
+             String program2 = programmebox.getSelectedItem().toString();
+             
+             if(year1.equals("--Select--")||program2.equals("--Select--")){
+
+                JOptionPane.showMessageDialog(this, "Please insert valid data to update!");
+                
+            }
+             else{
+               
+                // confirm message 
+                int x = JOptionPane.showConfirmDialog(null, "DO you really want to Update?");
         
-        int x = JOptionPane.showConfirmDialog(null, "DO you really want to Update?");
-        
-        if(x==0){
+                if(x==0){
             
           
-            String gid = idbox.getText();
-            String year = yearsembox.getSelectedItem().toString();
-            String program = programmebox.getSelectedItem().toString();
-            String grpno =  groupnobox.getValue().toString();
-            String subgrpno =  subgroupnobox.getValue().toString();  
-            String grpid = groupidbox.getText();
-            String subgrpid = subgroupidbox.getText();
+                 String gid = idbox.getText();
+                 String year = yearsembox.getSelectedItem().toString();
+                 String program = programmebox.getSelectedItem().toString();
+                 String grpno =  groupnobox.getValue().toString();
+                 String subgrpno =  subgroupnobox.getValue().toString();  
+                 String grpid = groupidbox.getText();
+                 String subgrpid = subgroupidbox.getText();
+
             
-            
-            
-            String sql = "UPDATE studentgroup SET AcademicYearSemester = '"+ year +"', Programme = '"+ program +"', GroupNo = '"+ grpno +"', SubGroupNo = '"+ subgrpno +"', GroupId = '"+ grpid +"', SubGroupId = '"+ subgrpid +"' where ID = '"+ gid +"' "; 
+                 String sql = "UPDATE studentgroup SET AcademicYearSemester = '"+ year +"', Programme = '"+ program +"', GroupNo = '"+ grpno +"', SubGroupNo = '"+ subgrpno +"', GroupId = '"+ grpid +"', SubGroupId = '"+ subgrpid +"' where ID = '"+ gid +"' "; 
            
-            try{
+                try{
             
-            pst = con.prepareStatement(sql);
-            pst.execute();
-            tableload();
-            
-            } catch (Exception e){
-                
-                JOptionPane.showMessageDialog(this,e);
-                System.out.println(e);
-            
-            }
-            
-        }       
+                    pst = con.prepareStatement(sql);
+                    pst.execute();
+                    tableload();
+
+                   } catch (Exception e){
+
+                    JOptionPane.showMessageDialog(this,e);
+                    System.out.println(e);
+
+                    }
+                }  
+            }       
     }//GEN-LAST:event_jButton1ActionPerformed
 
          else{
@@ -417,32 +429,102 @@ public class manageGroup extends javax.swing.JFrame {
     
     private void yearsemboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yearsemboxActionPerformed
       
-      autoGenerateID();
+        //Year Semester Generate
         
+        String year = yearsembox.getSelectedItem().toString();
+        String program = programmebox.getSelectedItem().toString();
+        String grpno =  groupnobox.getValue().toString();
+        String subgrpno =  subgroupnobox.getValue().toString();
+        String grpid = groupidbox.getText();
+        String subgrpid = subgroupidbox.getText();  
+        
+      if(year.equals("--Select--")||program.equals("--Select--")){
+          
+        groupidbox.setText(""); 
+        subgroupidbox.setText(""); 
+        
+      }else{
+          
+          autoGenerateID();
+          
+      }
         
         
     }//GEN-LAST:event_yearsemboxActionPerformed
 
     private void programmeboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_programmeboxActionPerformed
        
-       autoGenerateID();
+        //programme generate
+        
+        String year = yearsembox.getSelectedItem().toString();
+        String program = programmebox.getSelectedItem().toString();
+        String grpno =  groupnobox.getValue().toString();
+        String subgrpno =  subgroupnobox.getValue().toString();
+        String grpid = groupidbox.getText();
+        String subgrpid = subgroupidbox.getText();  
+        
+      if(year.equals("--Select--")||program.equals("--Select--")){
+          
+        groupidbox.setText(""); 
+        subgroupidbox.setText(""); 
+        
+      }else{
+          
+          autoGenerateID();
+      }
         
     }//GEN-LAST:event_programmeboxActionPerformed
 
     private void groupnoboxStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_groupnoboxStateChanged
        
-        autoGenerateID();
+        // Group number generate
+        
+        String year = yearsembox.getSelectedItem().toString();
+        String program = programmebox.getSelectedItem().toString();
+        String grpno =  groupnobox.getValue().toString();
+        String subgrpno =  subgroupnobox.getValue().toString();
+        String grpid = groupidbox.getText();
+        String subgrpid = subgroupidbox.getText();  
+        
+      if(year.equals("--Select--")||program.equals("--Select--")){
+          
+        groupidbox.setText(""); 
+        subgroupidbox.setText(""); 
+        
+      }else{
+          
+          autoGenerateID();
+      }
         
     }//GEN-LAST:event_groupnoboxStateChanged
 
     private void subgroupnoboxStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_subgroupnoboxStateChanged
        
-        autoGenerateID();
+        //Sub Group number Generate
+        
+        String year = yearsembox.getSelectedItem().toString();
+        String program = programmebox.getSelectedItem().toString();
+        String grpno =  groupnobox.getValue().toString();
+        String subgrpno =  subgroupnobox.getValue().toString();
+        String grpid = groupidbox.getText();
+        String subgrpid = subgroupidbox.getText();
+        
+        if(year.equals("--Select--")||program.equals("--Select--")){
+          
+        groupidbox.setText(""); 
+        subgroupidbox.setText(""); 
+        
+      }else{
+          
+          autoGenerateID();
+      }
         
     }//GEN-LAST:event_subgroupnoboxStateChanged
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
+        //Delete Button
+        
         if(!jTable2.getSelectionModel().isSelectionEmpty()){
         
         int x = JOptionPane.showConfirmDialog(null,"Do You want to Delete Group?" );
@@ -475,6 +557,10 @@ public class manageGroup extends javax.swing.JFrame {
         
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
        
+        //Clear All Button
+        
+        if(!jTable2.getSelectionModel().isSelectionEmpty()){
+        
         try{
             
         int r = jTable2.getSelectedRow();
@@ -488,12 +574,12 @@ public class manageGroup extends javax.swing.JFrame {
         String subgrpid =   jTable2.getValueAt(r, 6).toString();
         
      
-        yearsembox.setSelectedItem(null);
-        programmebox.setSelectedItem(null);
+        yearsembox.setSelectedItem("--Select--");
+        programmebox.setSelectedItem("--Select--");
         groupidbox.setText(""); 
         subgroupidbox.setText("");   
-        groupnobox.setValue(0);
-        subgroupnobox.setValue(0);
+        groupnobox.setValue(1);
+        subgroupnobox.setValue(1);
         
         } catch (Exception e){
                
@@ -504,6 +590,11 @@ public class manageGroup extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton3ActionPerformed
 
+      else{
+            JOptionPane.showMessageDialog(this, "Select a row to clear data");
+        }
+    }
+    
     private void groupidboxKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_groupidboxKeyPressed
        
         groupidbox.setEditable(false);

@@ -122,14 +122,19 @@ public class addStudentGroup extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Add Student Groups");
 
-        yearsembox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Select--", "Y1S2", "Y2S1", "Y2S2", "Y3S1", "Y3S2", "Y4S1", "Y4S2" }));
+        yearsembox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Select--", "Y1S1", "Y1S2", "Y2S1", "Y2S2", "Y3S1", "Y3S2", "Y4S1", "Y4S2" }));
         yearsembox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 yearsemboxActionPerformed(evt);
             }
         });
 
-        programmebox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Select--", "IT", "Engineering", "BM" }));
+        programmebox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Select--", "IT", "CSSE", "IM", "CSE" }));
+        programmebox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                programmeboxActionPerformed(evt);
+            }
+        });
 
         groupnobox.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
         groupnobox.setOpaque(false);
@@ -318,12 +323,14 @@ public class addStudentGroup extends javax.swing.JFrame {
         groupidbox.setText(gid);
         subgroupidbox.setText(subgid);
         
-       
+        
        
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        // insert student groups
         
         String year = yearsembox.getSelectedItem().toString();
         String program = programmebox.getSelectedItem().toString();
@@ -347,9 +354,6 @@ public class addStudentGroup extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Please fill the fields");
                 
             }
-            
-            
-            
             
             
             else{   
@@ -398,6 +402,10 @@ public class addStudentGroup extends javax.swing.JFrame {
         this.dispose();
         
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void programmeboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_programmeboxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_programmeboxActionPerformed
 
     /**
      * @param args the command line arguments

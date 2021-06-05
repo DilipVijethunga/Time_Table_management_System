@@ -145,7 +145,7 @@ public class myMain extends javax.swing.JFrame {
         sessionTypes m3 = new sessionTypes();
         m3.setVisible(true);
         this.dispose();
-        
+                   
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed

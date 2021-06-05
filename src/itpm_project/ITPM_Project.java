@@ -5,6 +5,8 @@
  */
 package itpm_project;
 
+import interfaces.myMain;
+
 /**
  *
  * @author Ashan
@@ -15,6 +17,11 @@ public class ITPM_Project {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
+        myMain m2 = new myMain();
+        m2.setVisible(true);
+        
+        
         
     }
 

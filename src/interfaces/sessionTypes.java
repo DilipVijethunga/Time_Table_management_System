@@ -9,6 +9,7 @@ import itpm_project.DBConnect;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
@@ -407,11 +408,13 @@ public class sessionTypes extends javax.swing.JFrame {
             pst.execute();
             JOptionPane.showMessageDialog(this, "Non Overlapping session added successfully!");
             
-            } catch (Exception e){
+            } catch (SQLException sqlEx){
                
-                JOptionPane.showMessageDialog(this,e);
-                System.out.println(e);
-            
+                if(sqlEx.getMessage().contains("Duplicate entry")&& sqlEx.getMessage().contains("for key")){
+
+                JOptionPane.showMessageDialog(this,"This Data already exists in the database");
+                System.out.println(sqlEx);
+                }
             }
          }
           
@@ -450,17 +453,16 @@ public class sessionTypes extends javax.swing.JFrame {
             pst.execute();
             JOptionPane.showMessageDialog(this, "Consecutive session added successfully!");
             
-            } catch (Exception e){
-                
-                JOptionPane.showMessageDialog(this,e);
-                System.out.println(e);
-            
+            } catch (SQLException sqlEx){
+               
+                if(sqlEx.getMessage().contains("Duplicate entry")&& sqlEx.getMessage().contains("for key")){
+
+                JOptionPane.showMessageDialog(this,"This Data already exists in the database");
+                System.out.println(sqlEx);
+                }
             }
-        
+         }
     
-        
-        }  
-        
     }//GEN-LAST:event_jButton3ActionPerformed
 
         else{
@@ -508,17 +510,16 @@ public class sessionTypes extends javax.swing.JFrame {
             pst.execute();
             JOptionPane.showMessageDialog(this, "Parallel session added successfully!");
             
-            } catch (Exception e){
-                
-                JOptionPane.showMessageDialog(this,e);
-                System.out.println(e);
-            
+            } catch (SQLException sqlEx){
+               
+                if(sqlEx.getMessage().contains("Duplicate entry")&& sqlEx.getMessage().contains("for key")){
+
+                JOptionPane.showMessageDialog(this,"This Data already exists in the database");
+                System.out.println(sqlEx);
+                }
             }
-        
+         }
     
-        }  
-        
-        
     }//GEN-LAST:event_jButton5ActionPerformed
 
         else{
