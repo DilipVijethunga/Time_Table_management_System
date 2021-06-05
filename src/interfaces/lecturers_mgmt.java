@@ -84,13 +84,13 @@ public class lecturers_mgmt extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         lectDetails = new javax.swing.JTable();
         errorBox = new javax.swing.JLabel();
-        save3 = new javax.swing.JButton();
+        homebtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1280, 720));
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
-                formComponentShown(evt);
+                formComponentshown(evt);
             }
         });
 
@@ -196,11 +196,6 @@ public class lecturers_mgmt extends javax.swing.JFrame {
         building.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Main Building", "New building", "D-block" }));
 
         level.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6" }));
-        level.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                levelKeyTyped(evt);
-            }
-        });
 
         lectDetails.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -223,11 +218,12 @@ public class lecturers_mgmt extends javax.swing.JFrame {
         errorBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         errorBox.setForeground(new java.awt.Color(255, 51, 0));
 
-        save3.setBackground(new java.awt.Color(168, 211, 229));
-        save3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        save3.addActionListener(new java.awt.event.ActionListener() {
+        homebtn.setBackground(new java.awt.Color(168, 211, 229));
+        homebtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        homebtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ico.png"))); // NOI18N
+        homebtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                save3ActionPerformed(evt);
+                homebtnActionPerformed(evt);
             }
         });
 
@@ -279,7 +275,7 @@ public class lecturers_mgmt extends javax.swing.JFrame {
                         .addContainerGap(283, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(2, 2, 2)
-                        .addComponent(save3)
+                        .addComponent(homebtn)
                         .addGap(18, 18, 18)
                         .addComponent(AddLect)
                         .addGap(19, 19, 19)
@@ -299,7 +295,7 @@ public class lecturers_mgmt extends javax.swing.JFrame {
                     .addComponent(RankGen, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(save1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(errorBox, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(save3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(homebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -425,14 +421,92 @@ public class lecturers_mgmt extends javax.swing.JFrame {
 
                 //load table after editing button pressed 
                lectureDetails();
-
+            
             } catch (SQLException ex) {
                 Logger.getLogger(lecturers_mgmt.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
     }//GEN-LAST:event_save2ActionPerformed
-}
-    //table mouse click on an entry(when editing)
+
+    //show in fileds when mouse click on an entry of table (when editing)
+
+    //Clear all fields 
+    
+    private void RankGenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RankGenActionPerformed
+        String eid = EmpID.getText();
+        String lev = level.getSelectedItem().toString();
+
+        Rank.setText(eid + "." + lev);
+    }//GEN-LAST:event_RankGenActionPerformed
+
+    private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
+                                               
+
+        int x = JOptionPane.showConfirmDialog(null, "Do you want to delete?");
+
+        if (x == 0) {
+
+            String eid = EmpID.getText();
+
+            String sql = "DELETE FROM lecturer where eid = '" + eid + "'";
+
+            try {
+
+                pst = con.prepareStatement(sql);
+                pst.execute();
+
+                //load table after delete button pressed
+                lectureDetails();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+    }//GEN-LAST:event_deleteActionPerformed
+
+    private void formComponentshown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentshown
+        Rank.setEditable(false);
+    }//GEN-LAST:event_formComponentshown
+
+    private void AddLectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddLectActionPerformed
+                                                
+
+        LectName.setText(null);
+        EmpID.setText(null);
+        faculty.setSelectedItem("Faculty of Computing");
+        department.setSelectedItem("Information Technology.");
+        center.setSelectedItem("Malabe");
+        building.setSelectedItem("Main Building");
+        level.setSelectedItem("1");
+        Rank.setText(null);
+
+    }//GEN-LAST:event_AddLectActionPerformed
+
+    private void homebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homebtnActionPerformed
+        Main homebt = new Main();
+        homebt.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_homebtnActionPerformed
+
+    private void EmpIDKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_EmpIDKeyPressed
+                                         
+        char c = evt.getKeyChar();
+
+        if (Character.isLetter(c)) {
+            save1.setEnabled(false);
+            errorBox.setText("Only numbers Allowed");
+        } else if (Character.isDigit(c)) {
+            save1.setEnabled(true);
+            errorBox.setText("");
+        } else if (EmpID.getText().isEmpty()) {
+            save1.setEnabled(true);
+            errorBox.setText("");
+        }
+    }//GEN-LAST:event_EmpIDKeyPressed
+
     private void lectDetailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lectDetailsMouseClicked
+        
 
         int row = lectDetails.getSelectedRow();
 
@@ -454,90 +528,7 @@ public class lecturers_mgmt extends javax.swing.JFrame {
         level.setSelectedItem(lev);
         Rank.setText(rnk);
 
-    
     }//GEN-LAST:event_lectDetailsMouseClicked
-
-
-    private void RankGenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RankGenActionPerformed
-
-        String eid = EmpID.getText();
-        String lev = level.getSelectedItem().toString();
-
-        Rank.setText(eid + "." + lev);
-
-    }//GEN-LAST:event_RankGenActionPerformed
-
-    //Delete Button Action
-    private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
-
-        int x = JOptionPane.showConfirmDialog(null, "Do you want to delete?");
-
-        if (x == 0) {
-
-            String eid = EmpID.getText();
-
-            String sql = "DELETE FROM lecturer where eid = '" + eid + "'";
-
-            try {
-
-                pst = con.prepareStatement(sql);
-                pst.execute();
-
-                //load table after delete button pressed
-                lectureDetails();
-
-            } catch (SQLException ex) {
-                Logger.getLogger(lecturers_mgmt.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        }
-
-    }//GEN-LAST:event_deleteActionPerformed
-
-    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-
-        Rank.setEditable(false);
-
-    }//GEN-LAST:event_formComponentShown
-
-    //Clear all fields
-    private void AddLectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddLectActionPerformed
-
-        LectName.setText(null);
-        EmpID.setText(null);
-        faculty.setSelectedItem("Faculty of Computing");
-        department.setSelectedItem("Information Technology.");
-        center.setSelectedItem("Malabe");
-        building.setSelectedItem("Main Building");
-        level.setSelectedItem("1");
-        Rank.setText(null);
-
-    }//GEN-LAST:event_AddLectActionPerformed
-
-    private void levelKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_levelKeyTyped
-
-    }//GEN-LAST:event_levelKeyTyped
-
-    private void save3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save3ActionPerformed
-        Main homebt = new Main();
-        homebt.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_save3ActionPerformed
-
-    private void EmpIDKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_EmpIDKeyPressed
-        char c = evt.getKeyChar();
-
-        if (Character.isLetter(c)) {
-            save1.setEnabled(false);
-            errorBox.setText("Only numbers Allowed");
-        } else if (Character.isDigit(c)) {
-            save1.setEnabled(true);
-            errorBox.setText("");
-        } else if (EmpID.getText().isEmpty()) {
-            save1.setEnabled(true);
-            errorBox.setText("");
-        }
-    }//GEN-LAST:event_EmpIDKeyPressed
 
     /**
      * @param args the command line arguments
@@ -586,6 +577,7 @@ public class lecturers_mgmt extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> department;
     private javax.swing.JLabel errorBox;
     private javax.swing.JComboBox<String> faculty;
+    private javax.swing.JButton homebtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -599,6 +591,5 @@ public class lecturers_mgmt extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> level;
     private javax.swing.JButton save1;
     private javax.swing.JButton save2;
-    private javax.swing.JButton save3;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -259,6 +260,7 @@ public class subject_mgmt extends javax.swing.JFrame {
 
         homebtn.setBackground(new java.awt.Color(168, 211, 229));
         homebtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        homebtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ico.png"))); // NOI18N
         homebtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 homebtnActionPerformed(evt);
@@ -467,10 +469,7 @@ public class subject_mgmt extends javax.swing.JFrame {
         String sql = "INSERT INTO subject (subj_code, offered_year, offered_sem, subj_name, lect_hours, tute_hours, lab_hours, eval_hours) values ('" + scode + "', '" + year + "', '" + semNo + "', '" + subName + "', '" + lech + "', '" + tuteh + "', '" + labh + "', '" + evalh + "')";
         
         /*
-        String year = oYear.getSelectedItem().toString();
-        String semNo = sem;
-        String subName = subjName.getText();
-        String scode = subjCode.getText();
+        
 
         //Spinner
         //lecture hours

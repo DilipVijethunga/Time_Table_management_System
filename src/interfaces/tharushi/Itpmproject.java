@@ -3,23 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package time_table_management_system;
-
-import interfaces.Main;
+package interfaces.tharushi;
 
 /**
  *
- * @author DILIP
+ * @author User
  */
-public class Time_Table_management_System {
+public class Itpmproject {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Main n = new Main();
-        n.setVisible(true);
-                
+        // TODO code application logic here
     }
     
 }

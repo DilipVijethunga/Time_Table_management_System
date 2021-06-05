@@ -22,7 +22,7 @@ public class DBConnect {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             if (conn == null) {
-                conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/timetable_mgmt", "root", "1234");
+                conn = (Connection) DriverManager.getConnection("jdbc:mysql://timetablemgmt.mysql.database.azure.com:3306/timetable_mgmt", "rootadmin@timetablemgmt", "!Tpm2021");
                 return conn;
             } else {
                 return conn;
